@@ -5,7 +5,7 @@
 #include "Led.h"
 #include "LightState.h"
 #include "LCD.h"
-
+#include "DHT_Data.h"
 
 class View
 {
@@ -31,6 +31,8 @@ public:
     void lightOn_3();
     void lightOn_4();
     void lightOn_5();
+
+    void TempWarning();
 };
 
 #endif /* __VIEW_H__ */

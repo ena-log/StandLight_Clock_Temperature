@@ -14,7 +14,6 @@ public:
     TempHumidView(LCD *lcd);
     ~TempHumidView();
     void setTempHumiData(float temp, float himid);
-
 };
 
 #endif

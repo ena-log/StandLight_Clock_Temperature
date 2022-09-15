@@ -10,6 +10,7 @@ class TempHumidService
 {
 private:
     TempHumidView *tempHumiView;
+    
 public:
     TempHumidService(TempHumidView *tempHumiView);
     ~TempHumidService();

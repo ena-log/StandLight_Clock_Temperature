@@ -21,7 +21,7 @@
 // func. main
 // 1. 프로그램의 시작점을 알려줌
 // 2. 초기화 및 로딩
-
+// using namespace std;
 int main()
 {
     std::cout << "Hello World!" << std::endl;
@@ -51,7 +51,16 @@ int main()
     while (1)
     {
         listener.checkEvent();
-        view.lightView();
+        if(dht.dhtData.Temp < 28)
+        {
+            // cout << "11" << endl;
+            view.lightView();        
+        }
+        else
+        {
+            // cout << "22" << endl;
+            view.TempWarning();
+        }
 
         // <time test>
         // timeSec = time(NULL);
@@ -74,7 +83,7 @@ int main()
         // }
         //delay(2000);
         
-        delay(10);
+        delay(50);
     }
 
     return 0;

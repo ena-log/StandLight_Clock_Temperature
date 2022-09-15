@@ -16,4 +16,5 @@ void TempHumidService::updateEvent(DHT_Data dhtData)
     temp = (float)dhtData.Temp + (float)dhtData.TempDec/10.0;
     humid = (float)dhtData.RH + (float)dhtData.RHDec/10.0;
     tempHumiView->setTempHumiData(temp, humid);
+
 }
