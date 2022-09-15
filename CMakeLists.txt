@@ -6,10 +6,12 @@ add_executable(${PROJECT_NAME}
     ./src/main.cpp
     ./src/app/Service/Service.cpp
     ./src/app/Service/ClockService.cpp
+    ./src/app/Service/TempHumidService.cpp
     ./src/app/Listener/Listener.cpp
     ./src/app/Controller/Controller.cpp
     ./src/app/View/View.cpp
     ./src/app/View/ClockView.cpp
+    ./src/app/View/TempHumidView.cpp
     ./src/hw/Button/Button.cpp
     ./src/hw/Led/Led.cpp
     ./src/hw/I2C/I2C.cpp

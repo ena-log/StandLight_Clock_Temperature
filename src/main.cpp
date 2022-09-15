@@ -12,6 +12,8 @@
 #include "ClockCheck.h"
 #include "I2C.h"
 #include "DHT11.h"
+#include "TempHumidService.h"
+#include "TempHumidView.h"
 
 // #include <time.h>
 
@@ -35,22 +37,23 @@ int main()
     Led led3(23);
     Led led4(24);
     Led led5(25);
+    DHT11 dht(7);
     LCD lcd(new I2C("/dev/i2c-1", 0x27));
     View view(&led1, &led2, &led3, &led4, &led5, &lcd);
+    TempHumidView tempHumidView(&lcd);
     ClockView clockView(&lcd);
     Service service(&view);
     ClockService clockService(&clockView);
-    Controller control(&service, &clockService);
-    Listener listener(&modeButton, &powerButton, &control, &clockCheck);
-    DHT11 dht(7);
-    DHT_Data dhtData;
+    TempHumidService tempHumidService(&tempHumidView);
+    Controller control(&service, &clockService, &tempHumidService);
+    Listener listener(&modeButton, &powerButton, &control, &clockCheck, &dht);
     
     while (1)
     {
         listener.checkEvent();
         view.lightView();
 
-        //<time test>
+        // <time test>
         // timeSec = time(NULL);
         // timeData = localtime(&timeSec);
 
@@ -60,15 +63,18 @@ int main()
         //            << timeData->tm_sec << std::endl;
         // delay(100);
 
-        dhtData = dht.readData();
-        if(dhtData.error == 0)
-        {
-            std::cout << "humidity : " << dhtData.RH << "." << dhtData.RHDec << "% "
-                      << "Temperaure : " << dhtData.Temp << "." << dhtData.TempDec << "'C "
-                      <<std::endl;
-        }
-
-        delay(2000);
+        // <dht11 test>
+        // DHT_Data dhtData;
+        // dhtData = dht.readData();
+        // if(dhtData.error == 0)
+        // {
+        //     std::cout << "humidity : " << dhtData.RH << "." << dhtData.RHDec << "% "
+        //               << "Temperaure : " << dhtData.Temp << "." << dhtData.TempDec << "'C "
+        //               <<std::endl;
+        // }
+        //delay(2000);
+        
+        delay(10);
     }
 
     return 0;
