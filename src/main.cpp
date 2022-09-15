@@ -11,6 +11,7 @@
 #include "ClockService.h"
 #include "ClockCheck.h"
 #include "I2C.h"
+#include "DHT11.h"
 
 // #include <time.h>
 
@@ -41,6 +42,8 @@ int main()
     ClockService clockService(&clockView);
     Controller control(&service, &clockService);
     Listener listener(&modeButton, &powerButton, &control, &clockCheck);
+    DHT11 dht(7);
+    DHT_Data dhtData;
     
     while (1)
     {
@@ -55,7 +58,17 @@ int main()
         // std::cout << timeData->tm_hour << ":" 
         //            << timeData->tm_min << ":"
         //            << timeData->tm_sec << std::endl;
-        delay(50);
+        // delay(100);
+
+        dhtData = dht.readData();
+        if(dhtData.error == 0)
+        {
+            std::cout << "humidity : " << dhtData.RH << "." << dhtData.RHDec << "% "
+                      << "Temperaure : " << dhtData.Temp << "." << dhtData.TempDec << "'C "
+                      <<std::endl;
+        }
+
+        delay(2000);
     }
 
     return 0;
